@@ -57,6 +57,12 @@ COMMANDS = {
     "proto-periodic": [PYTHON, "src/proto_atoms/proto_atom_periodic_map.py"],
     "proto-three-body": [PYTHON, "src/proto_atoms/proto_atom_three_body_dynamics.py"],
     "proto-valence": [PYTHON, "src/proto_atoms/proto_atom_valence_map.py"],
+
+    # App variants
+    "app-proto-atom": [PYTHON, "src/app_variants/proto_atom_render_app.py"],
+    "app-dipole": [PYTHON, "src/app_variants/proto_atom_dipole_interaction_app.py"],
+    "app-magnetic": [PYTHON, "src/app_variants/proto_atom_magnetic_alignment_app.py"],
+    "app-orbital": [PYTHON, "src/app_variants/proto_atom_orbital_app.py"],
 }
 
 GROUPS = {
