@@ -36,3 +36,4 @@ def load_density(
         return None
 
     return np.load(density_path)
+    return np.load(density_path)
