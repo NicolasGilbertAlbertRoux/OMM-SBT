@@ -11,9 +11,40 @@ import streamlit as st
 PYTHON = sys.executable
 
 DOMAINS = {
+    "Substantial oscillation": {
+        "script": "src/app_variants/substantial_oscillation_app.py",
+        "description": (
+            "Interactive single-pair Dirac beat explorer based on the Research 1 "
+            "single-pair scan. This page reconstructs the fundamental oscillatory "
+            "regime and its fermionic periodicity."
+        ),
+        "params": {
+            "beta_index": {"type": "int", "min": 0, "max": 12, "default": 0, "step": 1},
+            "seed_index": {"type": "int", "min": 0, "max": 12, "default": 0, "step": 1},
+            "pair_index": {"type": "int", "min": 1, "max": 8, "default": 1, "step": 1},
+            "t_max": {"type": "float", "min": 20.0, "max": 400.0, "default": 200.0, "step": 10.0},
+            "n_steps": {"type": "int", "min": 500, "max": 6000, "default": 4000, "step": 500},
+        },
+        "figures": [
+            "figures/app_substantial_oscillation.png",
+            "figures/app_substantial_oscillation_components.png",
+        ],
+        "presets": {
+            "Reference scan A": {
+                "beta_index": 0,
+                "seed_index": 0,
+                "pair_index": 1,
+                "t_max": 200.0,
+                "n_steps": 4000,
+            },
+        },
+    },
     "Proto-atom (interactive)": {
         "script": "src/app_variants/proto_atom_render_app.py",
-        "description": "Interactive proto-atomic render using the real research code adapted for parameterized launch.",
+        "description": (
+            "Interactive proto-atomic render using the real research code adapted "
+            "for parameterized launch."
+        ),
         "params": {
             "size": {"type": "int", "min": 64, "max": 256, "default": 128, "step": 32},
             "n_steps": {"type": "int", "min": 50, "max": 300, "default": 180, "step": 10},
@@ -68,7 +99,10 @@ DOMAINS = {
     },
     "Proto-atom dipole": {
         "script": "src/app_variants/proto_atom_dipole_interaction_app.py",
-        "description": "Interactive dipole interaction using the real dipole interaction research code adapted for parameterized launch.",
+        "description": (
+            "Interactive dipole interaction using the real dipole interaction "
+            "research code adapted for parameterized launch."
+        ),
         "params": {
             "size": {"type": "int", "min": 128, "max": 320, "default": 256, "step": 32},
             "n_steps": {"type": "int", "min": 120, "max": 480, "default": 360, "step": 20},
@@ -145,6 +179,14 @@ preset_names = ["Custom"] + list(entry.get("presets", {}).keys())
 selected_preset = st.selectbox("Preset", preset_names)
 preset_values = entry["presets"][selected_preset] if selected_preset != "Custom" else {}
 
+repo_root_value = "../unified-emergent-framework"
+if domain == "Substantial oscillation":
+    repo_root_value = st.text_input(
+        "Research 1 repository path",
+        value="../unified-emergent-framework",
+        help="Path to the unified-emergent-framework repository used for the Dirac beat scan.",
+    )
+
 st.markdown("**Parameters**")
 values = {}
 
@@ -172,6 +214,9 @@ for key, spec in entry["params"].items():
 
 if st.button("Run simulation", width="stretch"):
     cmd = [PYTHON, entry["script"]]
+    if domain == "Substantial oscillation":
+        cmd.extend(["--repo_root", repo_root_value])
+
     for key, value in values.items():
         if isinstance(value, bool):
             cmd.extend([f"--{key}", "1" if value else "0"])
@@ -196,7 +241,23 @@ if st.button("Run simulation", width="stretch"):
         st.error(st.session_state.report["error"])
     else:
         metrics = {}
-        if domain == "Proto-atom (interactive)":
+        if domain == "Substantial oscillation":
+            metrics = {
+                "beta": extract_float(stdout, "beta"),
+                "seed": extract_float(stdout, "seed"),
+                "pair_index": extract_float(stdout, "pair_index"),
+                "abs_energy": extract_float(stdout, "abs_energy"),
+                "pairing_error": extract_float(stdout, "pairing_error"),
+                "dominant_frequency": extract_float(stdout, "dominant_frequency"),
+                "expected_pair_frequency": extract_float(stdout, "expected_pair_frequency"),
+                "frequency_ratio": extract_float(stdout, "frequency_ratio"),
+                "relative_peak_strength": extract_float(stdout, "relative_peak_strength"),
+                "recurrence_quality": extract_float(stdout, "recurrence_quality"),
+                "dirac_dim": extract_float(stdout, "dirac_dim"),
+                "n_nodes": extract_float(stdout, "n_nodes"),
+                "n_edges": extract_float(stdout, "n_edges"),
+            }
+        elif domain == "Proto-atom (interactive)":
             metrics = {
                 "stability_index": extract_float(stdout, "stability_index"),
                 "final_std": extract_float(stdout, "final_std"),
@@ -231,7 +292,52 @@ st.subheader("Report")
 if report["domain"] != domain or not report["metrics"]:
     st.info("Run a simulation to generate a report.")
 else:
-    if domain == "Proto-atom (interactive)":
+    if domain == "Substantial oscillation":
+        col1, col2 = st.columns(2)
+        with col1:
+            st.metric(
+                "Dominant frequency",
+                f"{report['metrics'].get('dominant_frequency'):.4f}"
+                if report["metrics"].get("dominant_frequency") is not None else "—",
+            )
+            st.metric(
+                "Expected pair frequency",
+                f"{report['metrics'].get('expected_pair_frequency'):.4f}"
+                if report["metrics"].get("expected_pair_frequency") is not None else "—",
+            )
+            st.metric(
+                "Frequency ratio",
+                f"{report['metrics'].get('frequency_ratio'):.4f}"
+                if report["metrics"].get("frequency_ratio") is not None else "—",
+            )
+        with col2:
+            st.metric(
+                "Recurrence quality",
+                f"{report['metrics'].get('recurrence_quality'):.4f}"
+                if report["metrics"].get("recurrence_quality") is not None else "—",
+            )
+            st.metric(
+                "Relative peak strength",
+                f"{report['metrics'].get('relative_peak_strength'):.4f}"
+                if report["metrics"].get("relative_peak_strength") is not None else "—",
+            )
+            st.metric(
+                "Abs energy",
+                f"{report['metrics'].get('abs_energy'):.4f}"
+                if report["metrics"].get("abs_energy") is not None else "—",
+            )
+
+        st.markdown("### Structural context")
+        st.write({
+            "beta": report["metrics"].get("beta"),
+            "seed": report["metrics"].get("seed"),
+            "pair_index": report["metrics"].get("pair_index"),
+            "dirac_dim": report["metrics"].get("dirac_dim"),
+            "n_nodes": report["metrics"].get("n_nodes"),
+            "n_edges": report["metrics"].get("n_edges"),
+        })
+
+    elif domain == "Proto-atom (interactive)":
         col1, col2 = st.columns(2)
         with col1:
             score = report["metrics"].get("stability_index")
