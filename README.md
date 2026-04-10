@@ -34,6 +34,7 @@ These three usages should not be confused:
 
 ## Repository structure
 
+- `src/bell/` — supplementary Bell-like, Lorentz, and Pauli-inspired diagnostics
 - `src/core/` — core scripts used for the main conceptual figures and mantle tests
 - `src/laws/` — law-emergence tests and reduced interaction regimes
 - `src/geometry/` — geometric and geodesic emergence
@@ -123,6 +124,35 @@ The app is intended for:
 	- local testing by readers and researchers.
 
 It is not the canonical paper reproduction pipeline.
+
+---
+
+## Supplementary Bell-like, Lorentz, and Pauli diagnostics
+
+The repository includes a set of supplementary diagnostics exploring 
+Bell-like correlations, observer-dependent event reconstruction, and 
+axis-dependent measurement effects inspired by Lorentz and Pauli perspectives.
+
+These scripts are **not part of the main manuscript validation pipeline**.
+
+Instead, they are provided as:
+- methodological stress tests,
+- calibration-sensitive diagnostics,
+- and exploratory tools to analyze how measurement definitions and 
+  reconstruction choices can affect observed correlations.
+
+In particular:
+- Bell-like scripts explore bounded versus unbounded correlation aggregation,
+- Lorentz-oriented diagnostics probe apparent propagation and frame-dependent reconstruction,
+- Pauli-inspired diagnostics investigate observable incompatibility and axis sensitivity.
+
+These components are intended to:
+- document observer-side effects,
+- support calibration refinement,
+- and guide future extensions of the framework.
+
+They should be interpreted as **supplementary analytical tools**, 
+not as standalone claims of fundamental physical violations.
 
 ---
 
