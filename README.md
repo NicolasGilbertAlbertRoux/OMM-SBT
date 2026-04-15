@@ -11,6 +11,18 @@ Git repository:
 
 ---
 
+## Manuscripts and notes
+
+This repository accompanies the following research note:
+
+- **Extended research notes**: `notes/OMM-SBT-Extended-Notes.pdf`
+
+These extended notes document the broader research progression, additional numerical and conceptual investigations, and exploratory interpretations that are not all part of the main evidential pipeline of the paper.
+
+The repository itself should be considered the primary reproducibility and inspection layer for the computational framework.
+
+---
+
 ## Scope of the repository
 
 This repository serves **three distinct purposes**:
@@ -26,6 +38,7 @@ This repository serves **three distinct purposes**:
    Launch a lightweight Streamlit interface that executes real simulation scripts from the repository.
 
 These three usages should not be confused:
+
 - the **paper pipeline** is the most conservative and publication-oriented subset;
 - the **domain groups** are broader research explorations;
 - the **interactive app** is an exploration tool, not the canonical manuscript pipeline.
@@ -46,6 +59,7 @@ These three usages should not be confused:
 - `src/diagnostics/` — support and post-processing scripts
 - `src/reviewer_checks/` — targeted control scripts addressing reviewer-oriented methodological questions
 - `research1_core/` — reference implementation from Research 1, retained for continuity and cross-comparison
+- `notes/` — extended research notes and supplementary written material
 - `data/` — selected input data required for some exploratory regimes
 - `figures/` — generated figures retained for the manuscript and repository
 - `results/` — numerical outputs, summaries, and selected final states
@@ -101,7 +115,7 @@ python main.py --target cosmology
 python main.py --target showcase
 ```
 
-Domain meanings
+Domain meanings:
 	- core — main conceptual figures and mantle-level structural tests
 	- laws — interaction laws and reduced force / flux regimes
 	- geometry — effective, dynamic, and two-scale emergent geometry
@@ -133,14 +147,15 @@ It is not the canonical paper reproduction pipeline.
 ## Reviewer-oriented control tests
 
 Additional scripts are provided to address methodological questions about:
-- explicit nonlinear potential choices,
-- regime distinction beyond visual inspection,
-- cosmology-like expansion versus ordinary diffusion,
-- numerical stability, clipping, and seed sensitivity.
+	- explicit nonlinear potential choices,
+	- regime distinction beyond visual inspection,
+	- cosmology-like expansion versus ordinary diffusion,
+	- numerical stability, clipping, and seed sensitivity.
 
 Run them individually with:
 
 ```bash
+python src/reviewer_checks/generate_final_states.py
 python src/reviewer_checks/explicit_potential_checks.py
 python src/reviewer_checks/regime_distinction_metrics.py
 python src/reviewer_checks/cosmology_vs_diffusion_control.py
@@ -149,42 +164,40 @@ python src/reviewer_checks/stability_seed_sensitivity.py
 
 Outputs are written to:
 
+```bash
 results/reviewer_checks/
+```
 
-These scripts are not part of the minimal paper pipeline, but they are included for transparency, methodological clarification, and reproducibility extension.
+These scripts are not part of the minimal paper pipeline, but are included for transparency, methodological clarification, and reproducibility extension.
 
 Additional validation includes:
-- no-clipping stability-controlled simulations,
-- descriptor-space separation across five structural regimes.
+	- no-clipping stability-controlled simulations,
+	- descriptor-space separation across five structural regimes.
 
 ---
 
 ## Supplementary Bell-like, Lorentz, and Pauli diagnostics
 
-The repository includes a set of supplementary diagnostics exploring 
-Bell-like correlations, observer-dependent event reconstruction, and 
-axis-dependent measurement effects inspired by Lorentz and Pauli perspectives.
+The repository includes a set of supplementary diagnostics exploring Bell-like correlations, observer-dependent event reconstruction, and axis-dependent measurement effects inspired by Lorentz and Pauli perspectives.
 
-These scripts are **not part of the main manuscript validation pipeline**.
+These scripts are not part of the main manuscript validation pipeline.
 
 Instead, they are provided as:
-- methodological stress tests,
-- calibration-sensitive diagnostics,
-- and exploratory tools to analyze how measurement definitions and 
-  reconstruction choices can affect observed correlations.
+	- methodological stress tests,
+	- calibration-sensitive diagnostics,
+	- exploratory tools to analyze how measurement definitions and reconstruction choices can affect observed correlations.
 
 In particular:
-- Bell-like scripts explore bounded versus unbounded correlation aggregation,
-- Lorentz-oriented diagnostics probe apparent propagation and frame-dependent reconstruction,
-- Pauli-inspired diagnostics investigate observable incompatibility and axis sensitivity.
+	- Bell-like scripts explore bounded versus unbounded correlation aggregation,
+	- Lorentz-oriented diagnostics probe apparent propagation and frame-dependent reconstruction,
+	- Pauli-inspired diagnostics investigate observable incompatibility and axis sensitivity.
 
 These components are intended to:
-- document observer-side effects,
-- support calibration refinement,
-- and guide future extensions of the framework.
+	- document observer-side effects,
+	- support calibration refinement,
+	- guide future extensions of the framework.
 
-They should be interpreted as **supplementary analytical tools**, 
-not as standalone claims of fundamental physical violations.
+They should be interpreted as supplementary analytical tools, not as standalone claims of fundamental physical violations.
 
 ---
 
@@ -207,10 +220,11 @@ python main.py --target chain
 ## Final states and cached outputs
 
 Selected .npy files are provided in results/final_states/ for some key regimes.
+
 These files are included to facilitate rapid figure regeneration, while the corresponding scripts can also recompute results from scratch when applicable.
 
 This means the repository supports both:
-	- direct replay from preserved states, and
+	- direct replay from preserved states,
 	- fresh numerical regeneration for the relevant scripts.
 
 ---
@@ -227,35 +241,9 @@ In particular:
 This repository therefore supports:
 	- qualitative structural exploration,
 	- reproducible numerical experimentation,
-	- and possible downstream quantitative testing by external researchers.
+	- possible downstream quantitative testing by external researchers.
 
 The calibration logic should be understood as structured and physically motivated, but still open to further external testing and refinement.
-
----
-
-## Reviewer-oriented control tests
-
-Additional scripts are provided to address methodological questions about:
-- explicit nonlinear potential choices,
-- regime distinction beyond visual inspection,
-- cosmology-like expansion versus ordinary diffusion,
-- numerical stability, clipping, and seed sensitivity.
-
-Run them individually with:
-
-```bash
-python src/reviewer_checks/generate_final_states.py
-python src/reviewer_checks/explicit_potential_checks.py
-python src/reviewer_checks/regime_distinction_metrics.py
-python src/reviewer_checks/cosmology_vs_diffusion_control.py
-python src/reviewer_checks/stability_seed_sensitivity.py
-```
-
-Outputs are written to:
-
-results/reviewer_checks/
-
-These scripts are not part of the minimal paper pipeline, but are included for transparency, methodological clarification, and reproducibility extension.
 
 ---
 
@@ -275,7 +263,11 @@ This is intentional and central to the logic of the framework.
 
 ## Additional validation notes
 
-The repository also contains targeted validation work related to Lorentz-, Pauli-, and Bell-oriented interpretive tests developed as part of the broader research program. These tests should be understood as exploratory and methodological bridge analyses, not as standalone claims of formal derivation. They are included to document how observer-dependent reconstruction, calibration choices, and bounded versus unbounded observables affect interpretation.
+The repository also contains targeted validation work related to Lorentz-, Pauli-, and Bell-oriented interpretive tests developed as part of the broader research program.
+
+These tests should be understood as exploratory and methodological bridge analyses, not as standalone claims of formal derivation.
+
+They are included to document how observer-dependent reconstruction, calibration choices, and bounded versus unbounded observables affect interpretation.
 
 ---
 
@@ -291,7 +283,7 @@ Accordingly:
 Users should therefore distinguish between:
 	- paper-facing results,
 	- extended exploratory runs,
-	- and interactive pedagogical variants.
+	- interactive pedagogical variants.
 
 ---
 
@@ -305,568 +297,4 @@ MIT License
 
 If you use this code or build upon this framework, please cite the associated manuscript and this repository.
 
-Suggested citation block can be added here once the manuscript metadata is finalized.
-   Launch a lightweight Streamlit interface that executes real simulation scripts from the repository.
-
-These three usages should not be confused:
-- the **paper pipeline** is the most conservative and publication-oriented subset;
-- the **domain groups** are broader research explorations;
-- the **interactive app** is an exploration tool, not the canonical manuscript pipeline.
-
----
-
-## Repository structure
-
-- `src/bell/` — supplementary Bell-like, Lorentz, and Pauli-inspired diagnostics
-- `src/core/` — core scripts used for the main conceptual figures and mantle tests
-- `src/laws/` — law-emergence tests and reduced interaction regimes
-- `src/geometry/` — geometric and geodesic emergence
-- `src/cosmology/` — large-scale mantle / expansion-like behavior
-- `src/proto_atoms/` — proto-atomic, dipolar, molecular, and classification regimes
-- `src/magnetism/` — magnetic alignment and domain interactions
-- `src/orbital/` — orbital and quasi-orbital tests
-- `src/app_variants/` — parameterized local variants used by the interactive explorer
-- `src/diagnostics/` — support and post-processing scripts
-- `src/reviewer_checks/` — targeted control scripts addressing reviewer-oriented methodological questions
-- `data/` — selected input data required for some exploratory regimes
-- `figures/` — generated figures retained for the manuscript and repository
-- `results/` — numerical outputs, summaries, and selected final states
-- `results/reviewer_checks/` — figures, summaries, and CSV outputs generated by reviewer-oriented control tests
-- `main.py` — command-line launcher for reproducibility and grouped domain runs
-- `app.py` — local Streamlit exploration interface
-
----
-
-## Installation
-
-Create a Python environment, then install the required packages:
-
-```bash
-pip install -r requirements.txt
-```
-
-If you want to use the interactive interface, make sure Streamlit is installed from requirements.txt as well.
-
----
-
-## Recommended entry points
-
-1) Reproduce the paper subset
-
-Run the conservative paper-oriented pipeline:
-
-```bash
-python main.py --target all
-```
-
-This launches the principal manuscript-facing targets:
-	- unified chain diagram
-	- regime map
-	- lifecycle figure suite
-	- mantle instability test
-	- cosmology scan
-
-This is the best starting point for a reader who wants to reproduce the main paper outputs.
-
-2) Explore the project by scientific domain
-
-You can run broader grouped explorations:
-
-```bash
-python main.py --target core
-python main.py --target laws
-python main.py --target geometry
-python main.py --target proto-atoms
-python main.py --target magnetism
-python main.py --target orbital
-python main.py --target cosmology
-python main.py --target showcase
-```
-
-Domain meanings
-	- core — main conceptual figures and mantle-level structural tests
-	- laws — interaction laws and reduced force / flux regimes
-	- geometry — effective, dynamic, and two-scale emergent geometry
-	- proto-atoms — stable structures, dipoles, classification, molecular and family-level regimes
-	- magnetism — magnetic alignment, domains, and sector-level effects
-	- orbital — orbital and rotational exploratory tests
-	- cosmology — large-scale mantle feedback and expansion-like behavior
-	- showcase — a compact cross-domain demonstration run
-
-3) Launch the interactive explorer
-
-A lightweight local interface is also provided:
-
-```bash
-streamlit run app.py
-```
-
-This app launches real scripts from the repository through parameterized local variants and previews the figures they generate.
-
-The app is intended for:
-	- controlled parameter exploration,
-	- pedagogical inspection of selected regimes,
-	- local testing by readers and researchers.
-
-It is not the canonical paper reproduction pipeline.
-
----
-
-## Reviewer-oriented control tests
-
-Additional scripts are provided to address methodological questions about:
-- explicit nonlinear potential choices,
-- regime distinction beyond visual inspection,
-- cosmology-like expansion versus ordinary diffusion,
-- numerical stability, clipping, and seed sensitivity.
-
-Run them individually with:
-
-```bash
-python src/reviewer_checks/explicit_potential_checks.py
-python src/reviewer_checks/regime_distinction_metrics.py
-python src/reviewer_checks/cosmology_vs_diffusion_control.py
-python src/reviewer_checks/stability_seed_sensitivity.py
-```
-
-Outputs are written to:
-
-results/reviewer_checks/
-
-These scripts are not part of the minimal paper pipeline, but they are included for transparency, methodological clarification, and reproducibility extension.
-
-Additional validation includes:
-- no-clipping stability-controlled simulations,
-- descriptor-space separation across five structural regimes.
-
----
-
-## Supplementary Bell-like, Lorentz, and Pauli diagnostics
-
-The repository includes a set of supplementary diagnostics exploring 
-Bell-like correlations, observer-dependent event reconstruction, and 
-axis-dependent measurement effects inspired by Lorentz and Pauli perspectives.
-
-These scripts are **not part of the main manuscript validation pipeline**.
-
-Instead, they are provided as:
-- methodological stress tests,
-- calibration-sensitive diagnostics,
-- and exploratory tools to analyze how measurement definitions and 
-  reconstruction choices can affect observed correlations.
-
-In particular:
-- Bell-like scripts explore bounded versus unbounded correlation aggregation,
-- Lorentz-oriented diagnostics probe apparent propagation and frame-dependent reconstruction,
-- Pauli-inspired diagnostics investigate observable incompatibility and axis sensitivity.
-
-These components are intended to:
-- document observer-side effects,
-- support calibration refinement,
-- and guide future extensions of the framework.
-
-They should be interpreted as **supplementary analytical tools**, 
-not as standalone claims of fundamental physical violations.
-
----
-
-## Listing available targets
-
-To list all available command-line targets:
-
-```bash
-python main.py --list
-```
-
-To run a single target:
-
-```bash
-python main.py --target chain
-```
-
----
-
-## Final states and cached outputs
-
-Selected .npy files are provided in results/final_states/ for some key regimes.
-These files are included to facilitate rapid figure regeneration, while the corresponding scripts can also recompute results from scratch when applicable.
-
-This means the repository supports both:
-	- direct replay from preserved states, and
-	- fresh numerical regeneration for the relevant scripts.
-
----
-
-## Calibration and relation to physical scales
-
-The framework is formulated in abstract simulation units, but it supports physically meaningful calibration strategies.
-
-In particular:
-	- calibration is not imposed a priori;
-	- emergent structures and propagation regimes can be used to define possible scale mappings;
-	- the framework provides sufficient structure to enable external quantitative testing.
-
-This repository therefore supports:
-	- qualitative structural exploration,
-	- reproducible numerical experimentation,
-	- and possible downstream quantitative testing by external researchers.
-
-The calibration logic should be understood as structured and physically motivated, but still open to further external testing and refinement.
-
----
-
-## Reviewer-oriented control tests
-
-Additional scripts are provided to address methodological questions about:
-- explicit nonlinear potential choices,
-- regime distinction beyond visual inspection,
-- cosmology-like expansion versus ordinary diffusion,
-- numerical stability, clipping, and seed sensitivity.
-
-Run them individually with:
-
-```bash
-python src/reviewer_checks/generate_final_states.py
-python src/reviewer_checks/explicit_potential_checks.py
-python src/reviewer_checks/regime_distinction_metrics.py
-python src/reviewer_checks/cosmology_vs_diffusion_control.py
-python src/reviewer_checks/stability_seed_sensitivity.py
-```
-
-Outputs are written to:
-
-results/reviewer_checks/
-
-These scripts are not part of the minimal paper pipeline, but are included for transparency, methodological clarification, and reproducibility extension.
-
----
-
-## Reproducibility philosophy
-
-The repository is organized around a simple principle:
-
-first obtain the emergent structure, then investigate how physical calibration may be assigned to it.
-
-In other words:
-	- the model is not hard-wired to a specific physical scale from the start;
-	- scale assignment is treated as a downstream interpretative and testable step.
-
-This is intentional and central to the logic of the framework.
-
----
-
-## Additional validation notes
-
-The repository also contains targeted validation work related to Lorentz-, Pauli-, and Bell-oriented interpretive tests developed as part of the broader research program. These tests should be understood as exploratory and methodological bridge analyses, not as standalone claims of formal derivation. They are included to document how observer-dependent reconstruction, calibration choices, and bounded versus unbounded observables affect interpretation.
-
----
-
-## Important caution for interpretation
-
-This repository contains a large number of exploratory numerical experiments across several physical sectors.
-
-Accordingly:
-	- not every script has the same publication status;
-	- the all target is the most conservative manuscript-oriented subset;
-	- broader grouped targets and app variants should be interpreted as research exploration tools.
-
-Users should therefore distinguish between:
-	- paper-facing results,
-	- extended exploratory runs,
-	- and interactive pedagogical variants.
-
----
-
-## License
-
-MIT License
-
----
-
-## Citation
-
-If you use this code or build upon this framework, please cite the associated manuscript and this repository.
-
-Suggested citation block can be added here once the manuscript metadata is finalized.
-   Launch a lightweight Streamlit interface that executes real simulation scripts from the repository.
-
-These three usages should not be confused:
-- the **paper pipeline** is the most conservative and publication-oriented subset;
-- the **domain groups** are broader research explorations;
-- the **interactive app** is an exploration tool, not the canonical manuscript pipeline.
-
----
-
-## Repository structure
-
-- `src/bell/` — supplementary Bell-like, Lorentz, and Pauli-inspired diagnostics
-- `src/core/` — core scripts used for the main conceptual figures and mantle tests
-- `src/laws/` — law-emergence tests and reduced interaction regimes
-- `src/geometry/` — geometric and geodesic emergence
-- `src/cosmology/` — large-scale mantle / expansion-like behavior
-- `src/proto_atoms/` — proto-atomic, dipolar, molecular, and classification regimes
-- `src/magnetism/` — magnetic alignment and domain interactions
-- `src/orbital/` — orbital and quasi-orbital tests
-- `src/app_variants/` — parameterized local variants used by the interactive explorer
-- `src/diagnostics/` — support and post-processing scripts
-- `src/reviewer_checks/` — targeted control scripts addressing reviewer-oriented methodological questions
-- `data/` — selected input data required for some exploratory regimes
-- `figures/` — generated figures retained for the manuscript and repository
-- `results/` — numerical outputs, summaries, and selected final states
-- `results/reviewer_checks/` — figures, summaries, and CSV outputs generated by reviewer-oriented control tests
-- `main.py` — command-line launcher for reproducibility and grouped domain runs
-- `app.py` — local Streamlit exploration interface
-
----
-
-## Installation
-
-Create a Python environment, then install the required packages:
-
-```bash
-pip install -r requirements.txt
-```
-
-If you want to use the interactive interface, make sure Streamlit is installed from requirements.txt as well.
-
----
-
-## Recommended entry points
-
-1) Reproduce the paper subset
-
-Run the conservative paper-oriented pipeline:
-
-```bash
-python main.py --target all
-```
-
-This launches the principal manuscript-facing targets:
-	- unified chain diagram
-	- regime map
-	- lifecycle figure suite
-	- mantle instability test
-	- cosmology scan
-
-This is the best starting point for a reader who wants to reproduce the main paper outputs.
-
-2) Explore the project by scientific domain
-
-You can run broader grouped explorations:
-
-```bash
-python main.py --target core
-python main.py --target laws
-python main.py --target geometry
-python main.py --target proto-atoms
-python main.py --target magnetism
-python main.py --target orbital
-python main.py --target cosmology
-python main.py --target showcase
-```
-
-Domain meanings
-	- core — main conceptual figures and mantle-level structural tests
-	- laws — interaction laws and reduced force / flux regimes
-	- geometry — effective, dynamic, and two-scale emergent geometry
-	- proto-atoms — stable structures, dipoles, classification, molecular and family-level regimes
-	- magnetism — magnetic alignment, domains, and sector-level effects
-	- orbital — orbital and rotational exploratory tests
-	- cosmology — large-scale mantle feedback and expansion-like behavior
-	- showcase — a compact cross-domain demonstration run
-
-3) Launch the interactive explorer
-
-A lightweight local interface is also provided:
-
-```bash
-streamlit run app.py
-```
-
-This app launches real scripts from the repository through parameterized local variants and previews the figures they generate.
-
-The app is intended for:
-	- controlled parameter exploration,
-	- pedagogical inspection of selected regimes,
-	- local testing by readers and researchers.
-
-It is not the canonical paper reproduction pipeline.
-
----
-
-## Reviewer-oriented control tests
-
-Additional scripts are provided to address methodological questions about:
-- explicit nonlinear potential choices,
-- regime distinction beyond visual inspection,
-- cosmology-like expansion versus ordinary diffusion,
-- numerical stability, clipping, and seed sensitivity.
-
-Run them individually with:
-
-```bash
-python src/reviewer_checks/explicit_potential_checks.py
-python src/reviewer_checks/regime_distinction_metrics.py
-python src/reviewer_checks/cosmology_vs_diffusion_control.py
-python src/reviewer_checks/stability_seed_sensitivity.py
-```
-
-Outputs are written to:
-
-results/reviewer_checks/
-
-These scripts are not part of the minimal paper pipeline, but they are included for transparency, methodological clarification, and reproducibility extension.
-
-Additional validation includes:
-- no-clipping stability-controlled simulations,
-- descriptor-space separation across five structural regimes.
-
----
-
-## Supplementary Bell-like, Lorentz, and Pauli diagnostics
-
-The repository includes a set of supplementary diagnostics exploring 
-Bell-like correlations, observer-dependent event reconstruction, and 
-axis-dependent measurement effects inspired by Lorentz and Pauli perspectives.
-
-These scripts are **not part of the main manuscript validation pipeline**.
-
-Instead, they are provided as:
-- methodological stress tests,
-- calibration-sensitive diagnostics,
-- and exploratory tools to analyze how measurement definitions and 
-  reconstruction choices can affect observed correlations.
-
-In particular:
-- Bell-like scripts explore bounded versus unbounded correlation aggregation,
-- Lorentz-oriented diagnostics probe apparent propagation and frame-dependent reconstruction,
-- Pauli-inspired diagnostics investigate observable incompatibility and axis sensitivity.
-
-These components are intended to:
-- document observer-side effects,
-- support calibration refinement,
-- and guide future extensions of the framework.
-
-They should be interpreted as **supplementary analytical tools**, 
-not as standalone claims of fundamental physical violations.
-
----
-
-## Listing available targets
-
-To list all available command-line targets:
-
-```bash
-python main.py --list
-```
-
-To run a single target:
-
-```bash
-python main.py --target chain
-```
-
----
-
-## Final states and cached outputs
-
-Selected .npy files are provided in results/final_states/ for some key regimes.
-These files are included to facilitate rapid figure regeneration, while the corresponding scripts can also recompute results from scratch when applicable.
-
-This means the repository supports both:
-	- direct replay from preserved states, and
-	- fresh numerical regeneration for the relevant scripts.
-
----
-
-## Calibration and relation to physical scales
-
-The framework is formulated in abstract simulation units, but it supports physically meaningful calibration strategies.
-
-In particular:
-	- calibration is not imposed a priori;
-	- emergent structures and propagation regimes can be used to define possible scale mappings;
-	- the framework provides sufficient structure to enable external quantitative testing.
-
-This repository therefore supports:
-	- qualitative structural exploration,
-	- reproducible numerical experimentation,
-	- and possible downstream quantitative testing by external researchers.
-
-The calibration logic should be understood as structured and physically motivated, but still open to further external testing and refinement.
-
----
-
-## Reviewer-oriented control tests
-
-Additional scripts are provided to address methodological questions about:
-- explicit nonlinear potential choices,
-- regime distinction beyond visual inspection,
-- cosmology-like expansion versus ordinary diffusion,
-- numerical stability, clipping, and seed sensitivity.
-
-Run them individually with:
-
-```bash
-python src/reviewer_checks/generate_final_states.py
-python src/reviewer_checks/explicit_potential_checks.py
-python src/reviewer_checks/regime_distinction_metrics.py
-python src/reviewer_checks/cosmology_vs_diffusion_control.py
-python src/reviewer_checks/stability_seed_sensitivity.py
-```
-
-Outputs are written to:
-
-results/reviewer_checks/
-
-These scripts are not part of the minimal paper pipeline, but are included for transparency, methodological clarification, and reproducibility extension.
-
----
-
-## Reproducibility philosophy
-
-The repository is organized around a simple principle:
-
-first obtain the emergent structure, then investigate how physical calibration may be assigned to it.
-
-In other words:
-	- the model is not hard-wired to a specific physical scale from the start;
-	- scale assignment is treated as a downstream interpretative and testable step.
-
-This is intentional and central to the logic of the framework.
-
----
-
-## Additional validation notes
-
-The repository also contains targeted validation work related to Lorentz-, Pauli-, and Bell-oriented interpretive tests developed as part of the broader research program. These tests should be understood as exploratory and methodological bridge analyses, not as standalone claims of formal derivation. They are included to document how observer-dependent reconstruction, calibration choices, and bounded versus unbounded observables affect interpretation.
-
----
-
-## Important caution for interpretation
-
-This repository contains a large number of exploratory numerical experiments across several physical sectors.
-
-Accordingly:
-	- not every script has the same publication status;
-	- the all target is the most conservative manuscript-oriented subset;
-	- broader grouped targets and app variants should be interpreted as research exploration tools.
-
-Users should therefore distinguish between:
-	- paper-facing results,
-	- extended exploratory runs,
-	- and interactive pedagogical variants.
-
----
-
-## License
-
-MIT License
-
----
-
-## Citation
-
-If you use this code or build upon this framework, please cite the associated manuscript and this repository.
-
-Suggested citation block can be added here once the manuscript metadata is finalized.
+Suggested citation metadata can be added here once the manuscript record is finalized.
